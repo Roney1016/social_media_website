@@ -5,12 +5,12 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 
-app.get('/',function(req,res){
-    // return res.render('home',{heading:'hello sever'});
-    return res.send('hello buddy !')
-})
+// app.get('/',function(req,res){
+//     // return res.render('home',{heading:'hello sever'});
+//     return res.send('hello buddy !')
+// })
 
-
+app.use('/', require('./routes/index.js'))
 
 app.listen(port, function (err) {
     if (err) {
