@@ -38,6 +38,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 
 // app.get('/',function(req,res){
 //     // return res.render('home',{heading:'hello sever'});
