@@ -8,7 +8,7 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const MongoStore = require('connect-mongo')(session);
+
 
 const expressLayouts = require('express-ejs-layouts')
 app.use(expressLayouts);
@@ -32,18 +32,12 @@ app.use(session({
     //TODO change the secret before deployment in production mode
     secret: 'blahsomething',
     resave: false,
+    saveUninitialized: false,
+
     cookie: {
         maxAge: (1000 * 60 * 100)
-    },
-    store: new MongoStore(
-        {
-            mongooseConnection: db,
-            autoRemove: 'disabled'
-        },
-        function(err){
-            console.log(err || 'connect-nongodb setup ok')
-        }
-    )
+    }
+   
 
 }));
 

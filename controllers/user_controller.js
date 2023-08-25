@@ -58,8 +58,15 @@ module.exports.create = async function (req, res) {
 }
 // sign in and create a session for the user
 module.exports.createSession = function (req, res) {
+    return res.redirect('/user/profile')
+    // return res.redirect('/')
+
+
+}
+module.exports.destroySession = function(req,res){
+    req.logout((err)=>{
+        console.log(err);
+    });
+
     return res.redirect('/')
-    // return res.render('profile',{user:res.locals.user})
-
-
 }
