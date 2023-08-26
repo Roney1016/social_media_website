@@ -1,9 +1,9 @@
 <div id="sign_up">
-   <button>
-    <a href="/user/sign_up">
-        sign up
-    </a>
-   </button>
+    <button>
+        <a href="/user/sign_up">
+            sign up
+        </a>
+    </button>
 </div>
 
 <div id="sign_in">
@@ -15,10 +15,29 @@
 </div>
 
 <section id="feed-post">
-<h4>Posts</h4>
-<form action="/posts/create" id="new-post-form" method="post">
-    <textarea name="content" id="" cols="30" rows="10"></textarea>
-    <input type="submit" value="post">
-</form>
+    <h4>Posts</h4>
+    <form action="/posts/create" id="new-post-form" method="post">
+        <textarea name="content" id="" cols="30" rows="10"></textarea>
+        <input type="submit" value="post">
+    </form>
+
+    <div id="post-list-container">
+        <h4>all post are display below :-</h4>
+        <ul>
+            <% for(post of posts){ %>
+
+                <li>
+                    <p>
+                        <%= post.content %>
+                            <br>
+                            <small>
+                                <%=post.user.name %>
+                            </small>
+                    </p>
+                </li>
+
+                <% } %>
+        </ul>
+    </div>
 
 </section>
