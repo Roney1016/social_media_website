@@ -40,7 +40,7 @@
                     </p>
                     <div class="post-comment">
                         <% if(locals.user){ %>
-                            <form action="/comment/create" method="post">
+                            <form action="/comments/create" method="post">
                                 <input type="text" name="content" placeholder="Type here to add your comment..">
                                 <input type="hidden" name="post" value="<%= post._id %>">
                                 <input type="submit" value="Add comment">
