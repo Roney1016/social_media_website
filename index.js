@@ -4,6 +4,9 @@ const db = require('./config/mongoose');
 const port = process.env.PORT || 3000;
 const app = express();
 
+// add static files 
+app.use(express.static('assets'))
+
 //used for session cookies
 const session = require('express-session');
 const passport = require('passport');
