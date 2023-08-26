@@ -7,5 +7,6 @@ router.get('/',controller.home);
 // router.use('/user',require('./users.js'));
 router.use('/user',require('./users.js'))
 
+router.use('/posts',require('./posts.js'))
 
 module.exports = router;
