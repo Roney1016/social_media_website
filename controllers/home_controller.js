@@ -12,7 +12,9 @@ module.exports.home = function (req, res) {
     //  })
 
     //   populate the user of each post
-    Post.find({}).populate('user').exec()
+    Post.find({}).populate('user')
+    .populate('comments')
+    .exec()
     .then(posts=>{
         return res.render('home', { title: 'home' , posts:posts})
     })
