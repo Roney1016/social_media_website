@@ -108,3 +108,8 @@ module.exports.createSession = async function (req, res) {
     // }
 
 }
+module.exports.signOut = function(req,res){       
+    res.clearCookie('user_id');              // clear cookies 
+    res.redirect('back')
+
+}

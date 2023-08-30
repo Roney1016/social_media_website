@@ -12,5 +12,7 @@ router.post('/create',controller.create)   // create new user and sign up
 
 router.post('/create-session',controller.createSession);     // for sign in 
 
+router.get('/sign_out',controller.signOut);                // for sign out
+
 
 module.exports = router;
