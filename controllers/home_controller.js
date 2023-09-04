@@ -12,8 +12,16 @@ module.exports.home = function (req, res) {
     //  })
 
     //   populate the user of each post
-    Post.find({}).populate('user')
-    .populate('comments')
+    Post.find({})  .populate({
+        path: 'user', // Populate the user field of each post
+    })
+    .populate({
+        path: 'comments',    //Populate the comment field of each post
+        populate: {
+            path: 'user',  //Populate the user field of each comment
+            model: 'User'
+        }
+    })
     .exec()
     .then(posts=>{
         return res.render('home', { title: 'home' , posts:posts})
