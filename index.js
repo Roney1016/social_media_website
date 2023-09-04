@@ -41,7 +41,7 @@ app.use(session({
         maxAge: (1000 * 60 * 100)
     },
     store: MongoStore.create({
-        mongoUrl: 'mongodb://127.0.0.1:27017/test-app',
+        mongoUrl: 'mongodb://127.0.0.1:27017/college',
        autoRemove:'native',
        
     },
