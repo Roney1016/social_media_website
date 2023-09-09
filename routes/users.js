@@ -3,7 +3,9 @@ const passport = require('passport');
 const controller = require('../controllers/user_controller.js')
 const router =express.Router();
 
-router.get('/profile',passport.checkAuthentication,controller.userProfile);
+router.get('/profile/:id',passport.checkAuthentication,controller.userProfile);
+
+router.post('/update/:id',controller.update);
 
 router.get('/sign_up',controller.signUp)  //render sign up page
 

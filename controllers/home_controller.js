@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 
 module.exports.home = function (req, res) {
@@ -15,16 +16,20 @@ module.exports.home = function (req, res) {
     Post.find({})  .populate({
         path: 'user', // Populate the user field of each post
     })
-    .populate({
-        path: 'comments',    //Populate the comment field of each post
-        populate: {
-            path: 'user',  //Populate the user field of each comment
-            model: 'User'
-        }
-    })
-    .exec()
-    .then(posts=>{
-        return res.render('home', { title: 'home' , posts:posts})
-    })
-    
+        .populate({
+            path: 'comments',    //Populate the comment field of each post
+            populate: {
+                path: 'user',  //Populate the user field of each comment
+                model: 'User'
+            }
+        })
+        .exec()
+        .then(posts => {
+            User.find({})
+                .then(users => {
+                    return res.render('home', { title: 'home', posts: posts, all_users: users });
+                })
+
+        })
+
 }

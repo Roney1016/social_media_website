@@ -29,6 +29,12 @@
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
         </ul>
+        <div>
+          <% if(locals.user){ %>
+              <h4> <%= user.name %></h4>
+             <% } %>
+              
+      </div>
         <ul class="nav justify-content-end">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/user/sign_up">Sign UP</a>
