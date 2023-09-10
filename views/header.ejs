@@ -43,7 +43,10 @@
               <a class="nav-link" href="/user/sign_in">Sign In</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/user/sign_out">Sign out</a>
+              <% if(locals.user){ %> 
+                <a class="nav-link" href="/user/sign_out">Sign out</a>
+              <% } %>
+              
             </li>
         
       </div>
