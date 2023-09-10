@@ -5,7 +5,7 @@ const router =express.Router();
 
 router.get('/profile/:id',passport.checkAuthentication,controller.userProfile);
 
-router.post('/update/:id',controller.update);
+router.post('/update/:id',passport.checkAuthentication,controller.update);
 
 router.get('/sign_up',controller.signUp)  //render sign up page
 

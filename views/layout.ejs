@@ -7,6 +7,13 @@
     <title>
         <%= title %>
     </title>
+    <!-- noty -->
+    <base href="/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+   
+
     <link rel="stylesheet" href="/css/layout.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <%-style %>
@@ -15,13 +22,43 @@
 <body>
     <%- include('header') %>
 
+    <!-- <% if(flash.success && flash.success.length > 0){ %>
+        <h5>
+            <%= flash.success %>
+        </h5>
+    
+    <% } %>
+    <% if(flash.error && flash.error.length > 0){ %>
+        <h5>
+            <%= flash.error %>
+        </h5>
+    
+    <% } %> -->
+
+
         <%- body %>
 
-            <%- include('footer') %>
+    <%- include('footer') %>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
                     crossorigin="anonymous"></script>
+            <!-- <%- script %> -->
+           
+                <script>
+                    
+                      
+
+                      new Noty({
+                          theme:'relax',
+                          text:'<%= flash.success %>',
+                          type:'success',
+                          layout:'topRight',
+                          timeout:2000
+                      }).show()
+                      
+           
+                </script> 
 
 </body>
 

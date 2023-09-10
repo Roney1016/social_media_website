@@ -3,8 +3,10 @@ const Comment = require('../models/comment')
 module.exports.create = function (req, res) {
     Post.create({ content: req.body.content, user: req.user._id })
         .then(data => {
+            req.flash('success','post is published !')
             return res.redirect('back');
         }).catch(err => {
+            req.flash('error',err)
             console.log('error in creating a post')
             return;
         })
@@ -21,9 +23,13 @@ module.exports.destroy = async function (req, res) {
            post.deleteOne();
            
             Comment.deleteMany({ post: req.params.id })
-                .then(data => { console.log('post delete') })
+           
+                .then(data => {
+                    
+                     console.log('post delete') 
+                    })
                 .catch(err => { console.log(`error in deleting post ${err}`) })
-
+                req.flash('success','post and associated comments deleted !')
             return res.redirect('back')
         } else {
             return res.redirect('back')

@@ -13,6 +13,10 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo') ;
 
+// flash message
+const flash = require('connect-flash');
+const customMiddleware = require('./config/middleware');
+
 const expressLayouts = require('express-ejs-layouts')
 app.use(expressLayouts);
 // body parser
@@ -57,6 +61,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(customMiddleware.setFlash);
 
 // app.get('/',function(req,res){
 //     // return res.render('home',{heading:'hello sever'});
