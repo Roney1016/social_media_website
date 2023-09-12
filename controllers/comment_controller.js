@@ -14,6 +14,7 @@ module.exports.create = function (req, res) {
                     .then(comment => {
                         post.comments.push(comment);
                         post.save();
+                        req.flash('success','Comment created !')
                         return res.redirect('/')
                     }).catch(err => { console.log('error in add comment'); return; })
             }
@@ -30,11 +31,12 @@ module.exports.destroy = async function(req,res){
             let postId = comment.post;
 
             comment.deleteOne();
-
+            req.flash('success','Comment deleted !')
             Post.findByIdAndUpdate(postId,{$pull:{comment:req.params.id}})
+
             .then(data=>{console.log('delete commnet')})
             .catch(err=>{console.log(`error in deleting commnet ${err}`)})
-
+              
             return res.redirect('back');
 
         }else{

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/home.css">
 <div id="sign_up">
     <button>
         <a href="/user/sign_up">
@@ -20,37 +21,41 @@
        <% } %>
         
 </div>
-<section id="feed-post">
-    <h4>Posts</h4>
-    <% if(locals.user){ %>
-        <form action="/posts/create" id="new-post-form" method="post">
-            <textarea name="content" id="" cols="30" rows="10" placeholder="Type here...." required></textarea>
-            <input type="submit" value="post">
-        </form>
 
-        <% } %>
+<div id="home-container">
+    <section id="feed-post">
+        <h4>Posts</h4>
+        <% if(locals.user){ %>
+            <form action="/posts/create" id="new-post-form" method="post">
+                <textarea name="content" id="" cols="30" rows="10" placeholder="Type here...." required></textarea>
+                <input type="submit" value="post">
+            </form>
+    
+            <% } %>
+    
+    
+                <div id="post-list-container">
+                    <h4>all post are display below :-</h4>
+                    <ul>
+                        <% for(post of posts){ %>
+    
+                            <%- include('_post') %>
+                                <% } %>
+    
+                    </ul>
+                </div>
+    
+    </section>
+    
+    <section id="user-friends" >
+        <h4>Friends</h4>
+        <% for( u of all_users){ %>
+            <p>
+                <a href="/user/profile/<%= u.id %>">
+                    <%= u.name %>
+                </a>
+            </p>
+            <% } %>
+    </section>
 
-
-            <div id="post-list-container">
-                <h4>all post are display below :-</h4>
-                <ul>
-                    <% for(post of posts){ %>
-
-                        <%- include('_post') %>
-                            <% } %>
-
-                </ul>
-            </div>
-
-</section>
-
-<section id="user-friends" style="margin-left: 30px;">
-    <h4>Friends</h4>
-    <% for( u of all_users){ %>
-        <p>
-            <a href="/user/profile/<%= u.id %>">
-                <%= u.name %>
-            </a>
-        </p>
-        <% } %>
-</section>
+</div>
