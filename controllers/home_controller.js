@@ -13,7 +13,9 @@ module.exports.home = function (req, res) {
     //  })
 
     //   populate the user of each post
-    Post.find({})  .populate({
+    Post.find({}) 
+    .sort('-createdAt')    // for post sort on display (accoding to time)
+     .populate({
         path: 'user', // Populate the user field of each post
     })
         .populate({

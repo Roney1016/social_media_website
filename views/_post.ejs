@@ -1,7 +1,7 @@
-<li>
+<li id="post-<%= post._id %>">  <!-- why i am add id in list beacuse x on some of time i will also need to delete this post using ajax--> 
     <% if(locals.user && locals.user.id == post.user.id){ %>
         <small>
-            <a href="/posts/destroy/<%= post.id %>">X</a>
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
         </small>
         <% } %>
     <p>
