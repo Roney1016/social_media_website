@@ -7,6 +7,7 @@ try{
 
             if(req.xhr){
                 // for ajax request
+                await post.populate('user','name')
                 return res.status(200).json({
                     data:{
                         post:post
