@@ -11,9 +11,13 @@ class PostComments {
         this.postContainer = $(`#post-${postId}`);
         this.newCommentForm = $(`#post-${postId}-comment-form`);
         this.createComment(postId);
+        let self = this;
+        $(' .delete-comment-button',this.postContainer).each(function(){
+            self.deleteComment($(this));
+        })
     }
 
-
+    // method to create a delete in DOM
     createComment(postId) {
         let pSelf = this;
         //  console.log(pSelf)
@@ -29,6 +33,17 @@ class PostComments {
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     // console.log(newComment)
                     $(`#post-comment-${postId }`).prepend(newComment);
+                    pSelf.deleteComment($(' .delete-comment-button', newComment));
+                       //add noty
+                       new Noty({
+                        theme: 'relax',
+                        text: "Comment published!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+
+                    }).show();
+
 
                 }, error: function (error) {
                     console.log(error.responseText);
@@ -36,15 +51,16 @@ class PostComments {
             })
         })
     }
+
+    
+
     newCommentDom = function(comment){
         return $(`<li  id="comment-${comment._id}">
-        <!-- <small>
-           <a href="/comments/destroy/${ comment._id }">X</a>
-       </small> -->
+       
     <p >
       
            <small>
-               <a class="delete-comment-button" href="/comments/destroy/${ comment.id}">X</a>
+               <a class="delete-comment-button" href="/comments/destroy/${ comment._id}">X</a>
            </small>
           
       
@@ -58,6 +74,34 @@ class PostComments {
     
     </li>`)
     }
+
+    // method to DELETE a comment in DOM
+    deleteComment(deleteLink) {
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success:function(data){
+                    // console.log(data.data.comment_id)
+                    $(`#comment-${data.data.comment_id}`).remove();
+                    //add noty
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment deleted!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+
+                    }).show();
+
+                }, error: function (error) {
+                    console.log(error.responseText);
+                }
+            })
+        })
+     } 
     
 
 }
