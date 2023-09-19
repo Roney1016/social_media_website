@@ -2,23 +2,38 @@ const Comment = require('../models/comment');
 const Post = require('../models/post');
 const post = require('../models/post');
 
-module.exports.create = function (req, res) {
-    Post.findById(req.body.post)
-        .then(post => {
+module.exports.create = async function (req, res) {
+   try{
+    let post = await Post.findById(req.body.post)
+       
             if (post) {
-                Comment.create({
+               let comment = await Comment.create({
                     content: req.body.content,
                     post: req.body.post,
                     user: req.user._id
-                })
-                    .then(comment => {
+                });
+                    
                         post.comments.push(comment);
                         post.save();
+                       await comment.populate('user','name')
+                        if(req.xhr){
+                            console.log('hrx request')
+                            return res.status(200).json({
+                                data:{comment: comment
+                                },message: 'comment created'
+                            })
+                        }
                         req.flash('success','Comment created !')
                         return res.redirect('/')
-                    }).catch(err => { console.log('error in add comment'); return; })
+                   
+                  
             }
-        }).catch(err => { console.log("error in finding post for comment"); return; })
+   }catch(error){
+    console.error('Error:', err);
+    return res.status(500).send('Internal Server Error');
+   }
+
+       
 
 }
 

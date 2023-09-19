@@ -28,8 +28,12 @@
                 success: function(data){
                           console.log(data);
                         let newPost = newPostDom(data.data.post);
+                        
                         $('#post-list-container>ul').prepend(newPost);
-                        deletePost($(' .delete-post-button',newPost))
+                        deletePost($(' .delete-post-button',newPost));
+
+                        // call the create comment class
+                       new PostComments(data.data.post._id);
                 },error: function(error){
                     console.log(error.responseText)
                 }
@@ -98,6 +102,10 @@
       let self = $(this);
       let deleteButton = $(' .delete-post-button', self);
       deletePost(deleteButton);
+
+       // get the post's id by splitting the id attribute
+       let postId = self.prop('id').split("-")[1]
+       new PostComments(postId);
      
     });
   }
