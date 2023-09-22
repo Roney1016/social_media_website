@@ -24,6 +24,9 @@ app.use(expressLayouts);
 // body parser
 app.use(express.urlencoded({ extended: true }));
 
+// Make the upload path availabe to the browser
+app.use('/uploads',express.static(__dirname + '/uploads'))
+
 app.use(cookieParser());
 
 app.set('layout extractStyles', true);
