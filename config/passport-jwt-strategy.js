@@ -4,13 +4,13 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;  // this module help us e
 const User = require('../models/user');  // using Jwt ,identife user so import user
 
 let opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken,
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),//this method creates a new extractor that looks for the JWT in the authorization header with the scheme 'bearer'.
     secretOrKey: 'codial',
 }
 
 passport.use(new jwtStrategy(opts, function(jwt_payload, done) {
     
-    User.findById(jwt_payload)
+    User.findById(jwt_payload._id)
     .then(user=>{
    if(user){
     return done(null,user)
