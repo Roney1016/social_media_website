@@ -11,6 +11,7 @@ app.use(express.static('assets'))
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJwt = require('./config/passport-jwt-strategy');   // json web token
 const MongoStore = require('connect-mongo') ;
 
 
